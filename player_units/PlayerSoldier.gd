@@ -7,9 +7,10 @@ export (PackedScene) var Bullet
 
 export var speed: float = 100
 export var avoid_weight: float = 0.2
-export var health: int = 100
+export var initial_health: int = 100
 export var range_size: int = 200
-export var cooldown: float = 0.2
+export var gun_cooldown: float = 0.2
+export var watch_group = "enemy_units"
 
 var target = null setget set_target
 var selected = false setget set_selected
@@ -26,12 +27,14 @@ onready var gun_direction = $GunHandler/GunDirection
 onready var attack_cooldown = $GunHandler/AttackCooldown
 onready var gun_handler = $GunHandler
 onready var unit_range = $Range
+onready var health = $Health
 
 func _ready():
 	yield(get_tree(), "idle_frame")
 	sprite.material = sprite.material.duplicate()
 	unit_range.set_range_size(range_size)
-	gun_handler.set_cooldown(cooldown)
+	gun_handler.set_cooldown(gun_cooldown)
+	health.set_health(initial_health)
 	
 func _physics_process(delta):
 	velocity = Vector2.ZERO
@@ -64,7 +67,6 @@ func _physics_process(delta):
 
 func shoot():
 	if attack_cooldown.is_stopped():
-		print("Atirando as vera")
 		var bullet_instance = Bullet.instance()
 		var bullet_direction = gun_direction.global_position - gun.global_position
 		emit_signal("player_fired", bullet_instance, gun.global_position, bullet_direction.normalized())
@@ -91,34 +93,33 @@ func avoid():
 	return result.normalized()
 
 func handle_hit(damage: int):
-	if health <= 0:
-		queue_free()
-		return
-	health -= damage
-
-func _on_Range_body_entered(body: KinematicBody2D):
-	if body.is_in_group("enemy_units"):
-		print("Enemy Entered View", body)
-		enemies_on_range[body.get_instance_id()] = body
+	return health.take_hit(damage)
+	
 	
 
-func _on_Range_body_exited(body):
-	if body.is_in_group("enemy_units"):
+func _on_Range_body_entered(body: KinematicBody2D):
+	if body.is_in_group(watch_group):
+		print("Enemy Entered View", body)
+		enemies_on_range[body.get_instance_id()] = body
+
+func _on_Range_body_exited(body):	
+	if body.is_in_group(watch_group):
 		print("Enemy Exited view area", body)
 		enemies_on_range.erase(body.get_instance_id())
 
-
+func _on_Health_dead():
+	queue_free()
 
 func _draw():
 	# Draws some debug vectors.
-	if !DEBUG_DRAW:
-		return
-	draw_circle(Vector2.ZERO, $AvoidArea/CollisionShape2D.shape.radius,
-				Color(1, 1, 0, 0.2))
-	draw_line(Vector2.ZERO, av.rotated(-rotation)*50, Color(1, 0, 0), 5)
-	draw_line(Vector2.ZERO, velocity.rotated(-rotation)*speed, Color(0, 1, 0), 5)
-	if target:
-		draw_line(Vector2.ZERO, position.direction_to(target).rotated(-rotation)*50,
-			Color(0, 0, 1), 5)
+	if DEBUG_DRAW:
+		draw_circle(Vector2.ZERO, $AvoidArea/CollisionShape2D.shape.radius,
+					Color(1, 1, 0, 0.2))
+		draw_line(Vector2.ZERO, av.rotated(-rotation)*50, Color(1, 0, 0), 5)
+		draw_line(Vector2.ZERO, velocity.rotated(-rotation)*speed, Color(0, 1, 0), 5)
+		if target:
+			draw_line(Vector2.ZERO, position.direction_to(target).rotated(-rotation)*50,
+				Color(0, 0, 1), 5)
+
 
 

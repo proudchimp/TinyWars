@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player_units/PlayerSoldier.gd" type="Script" id=1]
 [ext_resource path="res://weapons/GunHandler.tscn" type="PackedScene" id=2]
 [ext_resource path="res://units_assets/Range.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/units/player_soldier.png" type="Texture" id=5]
+[ext_resource path="res://units_assets/Health.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -84,5 +85,8 @@ collision_layer = 32
 collision_mask = 2147483650
 
 [node name="GunHandler" parent="." instance=ExtResource( 2 )]
+
+[node name="Health" parent="." instance=ExtResource( 6 )]
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
+[connection signal="dead" from="Health" to="." method="_on_Health_dead"]

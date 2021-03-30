@@ -3,35 +3,23 @@ extends KinematicBody2D
 signal enemy_fired(bullet, place, direction)
 
 export (PackedScene) var Bullet
-export var health: int = 100
+export var initial_health: int = 100
 export var range_size: int = 100
+export var gun_cooldown: float = 0.2
 
 onready var gun = $GunHandler/Gun
 onready var gun_direction = $GunHandler/GunDirection
 onready var attack_cooldown = $GunHandler/AttackCooldown
-onready var unit_range = $Range
-
-var enemies_on_range = {}
-var active_target: KinematicBody2D = null
+onready var gun_handler = $GunHandler
+onready var unit_range = $AI/Range
+onready var health = $Health
 
 func _ready():
 	yield(get_tree(), "idle_frame")
 	unit_range.set_range_size(range_size)
+	health.set_health(initial_health)
+	gun_handler.set_cooldown(gun_cooldown)
 
-func _on_Range_body_entered(body: KinematicBody2D):
-	if body.is_in_group("player_units"):
-		enemies_on_range[body.get_instance_id()] = body
-		
-
-func _process(_delta):
-	if enemies_on_range.size() > 0:
-		var active_key = enemies_on_range.keys()[0]
-		active_target = enemies_on_range[active_key]
-	else:
-		active_target = null
-	if active_target:
-		look_at(active_target.position)
-		shoot()
 
 func shoot():
 	if attack_cooldown.is_stopped():
@@ -41,12 +29,15 @@ func shoot():
 		attack_cooldown.start()
 
 func handle_hit(damage):
-	if health <= 0:
-		queue_free()
-		return
-	health -= damage
+	health.take_hit(damage)
 
-func _on_Range_body_exited(body):
-	if body.is_in_group("player_units"):
-		print("player Exited view area", body)
-		enemies_on_range.erase(body.get_instance_id())
+func _on_Health_dead():
+	queue_free()
+
+
+func _on_AI_shoot():
+	shoot()
+
+
+func _on_AI_look(position):
+	look_at(position)
