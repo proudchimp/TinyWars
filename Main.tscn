@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://player_units/PlayerSoldier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemy_units/EnemySoldier.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/BulletManager.gd" type="Script" id=4]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="EnemyManager" type="Node2D" parent="."]
+
+[node name="EnemySoldier" parent="EnemyManager" instance=ExtResource( 3 )]
+position = Vector2( 470.665, 200.013 )
+
+[node name="PlayerManager" type="Node2D" parent="."]
+
+[node name="PlayerSoldier" parent="PlayerManager" instance=ExtResource( 2 )]
+position = Vector2( 207.95, 129.373 )
+
+[node name="PlayerSoldier2" parent="PlayerManager" instance=ExtResource( 2 )]
+position = Vector2( 216.68, 73.0205 )
+
+[node name="PlayerSoldier3" parent="PlayerManager" instance=ExtResource( 2 )]
+position = Vector2( 134.929, 126.992 )
+
+[node name="PlayerSoldier4" parent="PlayerManager" instance=ExtResource( 2 )]
+position = Vector2( 151.597, 60.3213 )
+
+[node name="PlayerSoldier5" parent="PlayerManager" instance=ExtResource( 2 )]
+position = Vector2( 186.52, 179.376 )

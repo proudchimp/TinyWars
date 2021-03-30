@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://player_units/PlayerSoldier.gd" type="Script" id=1]
+[ext_resource path="res://weapons/GunHandler.tscn" type="PackedScene" id=2]
+[ext_resource path="res://units_assets/Range.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/units/player_soldier.png" type="Texture" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_premul_alpha;
+
+// This shader only works properly with premultiplied alpha blend mode
+uniform float aura_width = 0;
+uniform vec4 aura_color : hint_color;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float a;
+	float maxa = col.a;
+	float mina = col.a;
+
+	a = texture(TEXTURE, UV + vec2(0.0, -aura_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(0.0, aura_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(-aura_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(aura_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	col.rgb *= col.a;
+
+	COLOR = col;
+	COLOR.rgb += aura_color.rgb * (maxa - mina);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/aura_width = 0.0
+shader_param/aura_color = Color( 0.968627, 0.831373, 0.372549, 1 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 4.34763
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 14.8184
+
+[node name="PlayerSoldier" type="KinematicBody2D" groups=[
+"player_units",
+]]
+collision_layer = 2147483649
+collision_mask = 31
+script = ExtResource( 1 )
+Bullet = ExtResource( 4 )
+avoid_weight = 0.4
+range_size = 100
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"player_units",
+]]
+shape = SubResource( 3 )
+
+[node name="AvoidArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidArea"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Range" parent="." instance=ExtResource( 3 )]
+collision_layer = 32
+collision_mask = 2147483650
+
+[node name="GunHandler" parent="." instance=ExtResource( 2 )]
+[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
