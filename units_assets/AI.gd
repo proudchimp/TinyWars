@@ -2,6 +2,7 @@ extends Node2D
 
 signal shoot
 signal look(position)
+signal state_changed(new_state)
 
 export var watch_group: String = "player_units"
 onready var detection_range = $Range
@@ -10,10 +11,18 @@ onready var detection_range = $Range
 var enemies_on_range = {}
 var active_target: KinematicBody2D = null
 
-enum {
+enum State {
 	PATROL,
 	ENGAGE
 }
+
+var current_state: int = State.PATROL setget set_state
+
+func set_state(new_state: int):
+	if new_state == current_state:
+		return
+	current_state = new_state
+	emit_signal("state_changed", current_state)
 
 func _on_Range_body_entered(body):
 	if body.is_in_group(watch_group):

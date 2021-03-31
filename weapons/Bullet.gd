@@ -2,10 +2,9 @@ extends Area2D
 class_name Bullet
 
 export var speed: int = 20
-export var damage: int = 10
-export var group_owner: String
 
 var direction := Vector2.ZERO setget set_direction
+var damage: int = 10 setget set_damage
 
 onready var kill_timer = $KillTimer
 
@@ -22,6 +21,8 @@ func set_direction(value: Vector2):
 	direction = value
 	rotation += value.angle()
 
+func set_damage(value):
+	damage = value
 
 func _on_KillTimer_timeout():
 	queue_free()

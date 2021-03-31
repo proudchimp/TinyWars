@@ -62,7 +62,7 @@ collision_layer = 2147483649
 collision_mask = 31
 script = ExtResource( 1 )
 Bullet = ExtResource( 4 )
-avoid_weight = 0.4
+avoid_weight = 0.8
 range_size = 100
 
 [node name="Sprite" type="Sprite" parent="."]

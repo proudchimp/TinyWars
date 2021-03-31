@@ -11,6 +11,7 @@ export var initial_health: int = 100
 export var range_size: int = 200
 export var gun_cooldown: float = 0.2
 export var watch_group = "enemy_units"
+export var initial_damage = 10
 
 var target = null setget set_target
 var selected = false setget set_selected
@@ -68,6 +69,8 @@ func _physics_process(delta):
 func shoot():
 	if attack_cooldown.is_stopped():
 		var bullet_instance = Bullet.instance()
+		var new_damage = initial_damage * (health.health/initial_health)
+		bullet_instance.set_damage(new_damage)
 		var bullet_direction = gun_direction.global_position - gun.global_position
 		emit_signal("player_fired", bullet_instance, gun.global_position, bullet_direction.normalized())
 		attack_cooldown.start()

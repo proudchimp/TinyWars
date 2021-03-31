@@ -6,6 +6,7 @@ export (PackedScene) var Bullet
 export var initial_health: int = 100
 export var range_size: int = 100
 export var gun_cooldown: float = 0.2
+export var initial_damage: int = 10
 
 onready var gun = $GunHandler/Gun
 onready var gun_direction = $GunHandler/GunDirection
@@ -24,6 +25,8 @@ func _ready():
 func shoot():
 	if attack_cooldown.is_stopped():
 		var bullet_instance = Bullet.instance()
+		var new_damage = initial_damage * (health.health/initial_health)
+		bullet_instance.set_damage(new_damage)
 		var bullet_direction = gun_direction.global_position - gun.global_position
 		emit_signal("enemy_fired", bullet_instance, gun.global_position, bullet_direction.normalized())
 		attack_cooldown.start()

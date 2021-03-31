@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/roboto_light_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/roboto_semibold_36.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/GameOverScreen.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.490196, 0.490196, 0.490196, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+shadow_color = Color( 0.12549, 0.121569, 0.121569, 0.6 )
+shadow_size = 10
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rows" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 560.0
+custom_constants/separation = 150
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/Rows"]
+margin_right = 944.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 1 )
+text = "GAME OVER"
+align = 1
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/Rows"]
+margin_top = 236.0
+margin_right = 944.0
+margin_bottom = 329.0
+
+[node name="ButtonBox" type="VBoxContainer" parent="Panel/MarginContainer/Rows/CenterContainer"]
+margin_left = 367.0
+margin_right = 577.0
+margin_bottom = 93.0
+custom_constants/separation = 25
+
+[node name="RestartButton" type="Button" parent="Panel/MarginContainer/Rows/CenterContainer/ButtonBox"]
+margin_right = 210.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 2 )
+text = " RESTART "
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/Rows/CenterContainer/ButtonBox"]
+margin_top = 79.0
+margin_right = 210.0
+margin_bottom = 93.0
+text = "@claudiodavi"
+align = 1
+[connection signal="pressed" from="Panel/MarginContainer/Rows/CenterContainer/ButtonBox/RestartButton" to="." method="_on_RestartButton_pressed"]
