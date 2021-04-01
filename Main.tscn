@@ -16,26 +16,11 @@ script = ExtResource( 4 )
 
 [node name="EnemyManager" type="Node2D" parent="."]
 
-[node name="EnemySoldier" parent="EnemyManager" instance=ExtResource( 3 )]
-position = Vector2( 428.01, 241.99 )
-
-[node name="EnemySoldier7" parent="EnemyManager" instance=ExtResource( 3 )]
-position = Vector2( 412.136, 24.5165 )
-
-[node name="EnemySoldier2" parent="EnemyManager" instance=ExtResource( 3 )]
-position = Vector2( 443.304, 134.8 )
-
-[node name="EnemySoldier3" parent="EnemyManager" instance=ExtResource( 3 )]
-position = Vector2( 450.506, 57.6418 )
-
 [node name="EnemySoldier4" parent="EnemyManager" instance=ExtResource( 3 )]
 position = Vector2( 358.39, 251.695 )
 
 [node name="EnemySoldier6" parent="EnemyManager" instance=ExtResource( 3 )]
 position = Vector2( 295.066, 256.937 )
-
-[node name="EnemySoldier5" parent="EnemyManager" instance=ExtResource( 3 )]
-position = Vector2( 491.454, 95.4395 )
 
 [node name="PlayerManager" type="Node2D" parent="."]
 

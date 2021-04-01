@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/ScreenShake.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/Controls.gd" type="Script" id=2]
 [ext_resource path="res://gameplay/Camera2D.gd" type="Script" id=3]
 
@@ -13,5 +12,3 @@ anchor_mode = 0
 current = true
 script = ExtResource( 3 )
 speed = 25.0
-
-[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 1 )]

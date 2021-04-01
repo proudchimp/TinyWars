@@ -13,16 +13,26 @@ _global_script_classes=[ {
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://weapons/Bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PlayerSoldier",
+"language": "GDScript",
+"path": "res://player_units/PlayerSoldier.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"Bullet": "",
+"PlayerSoldier": ""
 }
 
 [application]
 
 config/name="TinyWars"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://ui/StartGameScreen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Settings="*res://settings.gd"
 
 [input]
 

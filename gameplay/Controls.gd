@@ -4,7 +4,6 @@ var dragging = false
 var selected = []
 var highlighted = []
 onready var camera = $Camera2D
-onready var shake = $Camera2D/ScreenShake
 
 
 var drag_start = Vector2.ZERO
@@ -12,7 +11,6 @@ var select_rect = RectangleShape2D.new()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		var event_handler: InputEventMouseButton = event
 		if event.is_pressed():
 			dragging = true
 			drag_start = get_global_mouse_position()
@@ -54,9 +52,6 @@ func clean_highlight():
 		if unit.collider:
 			unit.collider.selected = false
 	highlighted = []
-
-func screen_shake():
-	shake.start()
 
 func _draw():
 	if dragging:
