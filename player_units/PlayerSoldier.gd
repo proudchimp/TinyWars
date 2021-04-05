@@ -69,8 +69,9 @@ func _physics_process(delta):
 
 func shoot():
 	if attack_cooldown.is_stopped():
+		gun_handler.play_sound("pistol")
 		var bullet_instance = Bullet.instance()
-		var new_damage = initial_damage * (health.health/initial_health)
+		var new_damage = initial_damage * (health.health/initial_health) + 2
 		bullet_instance.set_damage(new_damage)
 		var bullet_direction = gun_direction.global_position - gun.global_position
 		emit_signal("player_fired", bullet_instance, gun.global_position, bullet_direction.normalized())

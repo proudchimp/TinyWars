@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/worlds/MASCARA-2B.png" type="Texture" id=1]
+[ext_resource path="res://assets/worlds/TERRA.png" type="Texture" id=2]
+[ext_resource path="res://fonts/arcade_classic.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://ui/WorldSelection.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+font_data = ExtResource( 4 )
+
+[node name="WorldSelection" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_right = 384.0
+margin_bottom = 192.0
+custom_constants/separation = 50
+
+[node name="PageTitle" type="Label" parent="Panel/MarginContainer/MainContainer"]
+margin_right = 384.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 3 )
+text = "WORLD SELECT"
+align = 1
+
+[node name="Center" type="CenterContainer" parent="Panel/MarginContainer/MainContainer"]
+margin_top = 75.0
+margin_right = 384.0
+margin_bottom = 132.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer/Center"]
+margin_left = 127.0
+margin_right = 257.0
+margin_bottom = 57.0
+custom_constants/separation = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer"]
+margin_right = 130.0
+margin_bottom = 57.0
+custom_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer"]
+margin_right = 44.0
+margin_bottom = 57.0
+
+[node name="TerraButton" type="Button" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 44.0
+margin_bottom = 38.0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 44.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 1 )
+text = "TERRA"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer"]
+margin_left = 74.0
+margin_right = 130.0
+margin_bottom = 57.0
+
+[node name="MascaraButton" type="Button" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_left = 6.0
+margin_right = 50.0
+margin_bottom = 38.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+icon = ExtResource( 1 )
+flat = true
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 42.0
+margin_right = 56.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
+text = "MASCARA"
+[connection signal="pressed" from="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer/TerraButton" to="." method="_on_TerraButton_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/MainContainer/Center/VBoxContainer/HBoxContainer/VBoxContainer2/MascaraButton" to="." method="_on_MascaraButton_pressed"]

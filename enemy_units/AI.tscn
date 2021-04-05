@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://units_assets/AI.gd" type="Script" id=2]
+[ext_resource path="res://units_assets/Range.tscn" type="PackedScene" id=3]
+
+[node name="AI" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Range" parent="." instance=ExtResource( 3 )]
+collision_layer = 32
+[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]

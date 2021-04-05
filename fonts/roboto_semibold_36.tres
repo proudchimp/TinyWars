@@ -1,8 +1,12 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
 [sub_resource type="DynamicFontData" id=1]
+antialiased = false
+hinting = 0
 font_path = "res://fonts/RobotoMono-SemiBold.ttf"
 
 [resource]
-size = 36
+size = 20
+outline_size = 2
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 font_data = SubResource( 1 )

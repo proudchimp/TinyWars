@@ -1,10 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/units/player_soldier.png" type="Texture" id=1]
-[ext_resource path="res://assets/units/player_base_tank.png" type="Texture" id=2]
 [ext_resource path="res://ui/UnitSelectionScreen.gd" type="Script" id=3]
-[ext_resource path="res://fonts/roboto_semibold_36.tres" type="DynamicFont" id=4]
-[ext_resource path="res://fonts/roboto_light_24.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://fonts/arcade_classic.tres" type="DynamicFont" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 10
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
 
 [node name="UnitSelectionScreen" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -19,108 +34,136 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 50
-custom_constants/margin_top = 50
-custom_constants/margin_left = 50
-custom_constants/margin_bottom = 50
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 974.0
-margin_bottom = 550.0
-custom_constants/separation = 50
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 374.0
+margin_bottom = 182.0
+custom_constants/separation = 5
+alignment = 1
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/MainContainer"]
-margin_right = 924.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 4 )
+margin_top = 11.0
+margin_right = 364.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 6 )
 text = "Pick your units"
+align = 1
 
 [node name="SlotsContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer"]
-margin_top = 98.0
-margin_right = 924.0
-margin_bottom = 131.0
+margin_top = 41.0
+margin_right = 364.0
+margin_bottom = 66.0
 
 [node name="SlotsLabel" type="Label" parent="Panel/MarginContainer/MainContainer/SlotsContainer"]
-margin_right = 280.0
-margin_bottom = 33.0
-custom_fonts/font = ExtResource( 5 )
+margin_top = 4.0
+margin_right = 157.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 1 )
 text = "Max Slots Available:"
 
 [node name="SlotsAvailable" type="Label" parent="Panel/MarginContainer/MainContainer/SlotsContainer"]
-margin_left = 284.0
-margin_right = 312.0
-margin_bottom = 33.0
-custom_fonts/font = ExtResource( 5 )
-text = "10"
+margin_left = 161.0
+margin_right = 161.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 6 )
 
 [node name="InteractionContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainContainer"]
-margin_top = 181.0
-margin_right = 924.0
-margin_bottom = 359.0
-custom_constants/separation = 50
+margin_top = 71.0
+margin_right = 364.0
+margin_bottom = 124.0
+custom_constants/separation = 5
 
 [node name="SoldierContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/InteractionContainer"]
-margin_right = 924.0
-margin_bottom = 64.0
-custom_constants/separation = 50
-
-[node name="SoldierIcon" type="TextureRect" parent="Panel/MarginContainer/MainContainer/InteractionContainer/SoldierContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 1 )
+margin_right = 364.0
+margin_bottom = 24.0
+custom_constants/separation = 20
 
 [node name="SoldierSelect" type="SpinBox" parent="Panel/MarginContainer/MainContainer/InteractionContainer/SoldierContainer"]
-margin_left = 114.0
-margin_right = 188.0
-margin_bottom = 64.0
+margin_right = 74.0
+margin_bottom = 24.0
 max_value = 10.0
 rounded = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/InteractionContainer"]
-margin_top = 114.0
-margin_right = 924.0
-margin_bottom = 178.0
-custom_constants/separation = 50
+[node name="Label" type="Label" parent="Panel/MarginContainer/MainContainer/InteractionContainer/SoldierContainer"]
+margin_left = 94.0
+margin_top = 3.0
+margin_right = 179.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+text = "Basic  Unit"
 
-[node name="TankIcon" type="TextureRect" parent="Panel/MarginContainer/MainContainer/InteractionContainer/HBoxContainer2"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 2 )
+[node name="Label2" type="Label" parent="Panel/MarginContainer/MainContainer/InteractionContainer/SoldierContainer"]
+margin_left = 199.0
+margin_top = 6.0
+margin_right = 255.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 3 )
+text = "Uses 1 Slot"
+valign = 2
 
-[node name="TankSelect" type="SpinBox" parent="Panel/MarginContainer/MainContainer/InteractionContainer/HBoxContainer2"]
-margin_left = 114.0
-margin_right = 188.0
-margin_bottom = 64.0
+[node name="TankContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/InteractionContainer"]
+margin_top = 29.0
+margin_right = 364.0
+margin_bottom = 53.0
+custom_constants/separation = 20
+
+[node name="TankSelect" type="SpinBox" parent="Panel/MarginContainer/MainContainer/InteractionContainer/TankContainer"]
+margin_right = 74.0
+margin_bottom = 24.0
+rounded = true
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/MainContainer/InteractionContainer/TankContainer"]
+margin_left = 94.0
+margin_top = 3.0
+margin_right = 179.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+text = "Heavy  Unit"
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/MainContainer/InteractionContainer/TankContainer"]
+margin_left = 199.0
+margin_top = 6.0
+margin_right = 263.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 4 )
+text = "Uses  2  Slots"
+valign = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/MainContainer"]
-margin_top = 409.0
-margin_right = 924.0
-margin_bottom = 448.0
+margin_top = 129.0
+margin_right = 364.0
+margin_bottom = 160.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/MainContainer/CenterContainer"]
-margin_left = 246.0
-margin_right = 678.0
-margin_bottom = 39.0
-custom_constants/separation = 100
+margin_left = 42.0
+margin_right = 322.0
+margin_bottom = 31.0
+custom_constants/separation = 35
 
 [node name="ResetUnits" type="Button" parent="Panel/MarginContainer/MainContainer/CenterContainer/HBoxContainer"]
-margin_right = 180.0
-margin_bottom = 39.0
-custom_fonts/font = ExtResource( 5 )
+margin_right = 113.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 5 )
 text = "RESET Values"
+flat = true
 
 [node name="StartGameButton" type="Button" parent="Panel/MarginContainer/MainContainer/CenterContainer/HBoxContainer"]
-margin_left = 280.0
-margin_right = 432.0
-margin_bottom = 39.0
-custom_fonts/font = ExtResource( 5 )
+margin_left = 148.0
+margin_right = 280.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 6 )
 text = "Start Game"
+flat = true
 [connection signal="value_changed" from="Panel/MarginContainer/MainContainer/InteractionContainer/SoldierContainer/SoldierSelect" to="." method="_on_SoldierSelect_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/MainContainer/InteractionContainer/HBoxContainer2/TankSelect" to="." method="_on_TankSelect_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/MainContainer/InteractionContainer/TankContainer/TankSelect" to="." method="_on_TankSelect_value_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/MainContainer/CenterContainer/HBoxContainer/ResetUnits" to="." method="_on_ResetUnits_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/MainContainer/CenterContainer/HBoxContainer/StartGameButton" to="." method="_on_StartGameButton_pressed"]

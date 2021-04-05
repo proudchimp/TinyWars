@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Wartime - AShamaluevMusic.wav-463c3967f2fb80b4e45a77ad71aea0ef.sample"
+
+[deps]
+
+source_file="res://assets/music/Wartime - AShamaluevMusic.wav"
+dest_files=[ "res://.import/Wartime - AShamaluevMusic.wav-463c3967f2fb80b4e45a77ad71aea0ef.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
